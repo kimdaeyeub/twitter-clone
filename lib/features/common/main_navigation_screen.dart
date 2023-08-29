@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter/features/home/home_screen.dart';
+import 'package:twitter/test_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -102,7 +103,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         children: [
           Offstage(
             offstage: _selectedIndex != 0,
-            child: const HomeScreen(),
+            child: const TestScreen(),
           ),
           Offstage(
             offstage: _selectedIndex != 1,
@@ -132,7 +133,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             offstage: _selectedIndex != 3,
             child: const Center(
               child: Text(
-                "Heart",
+                "Likes",
                 style: TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.w800,
