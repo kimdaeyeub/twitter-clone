@@ -1,128 +1,76 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter/features/home/widgets/post_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: SvgPicture.asset(
-          "assets/icons/threads.svg",
-          width: 40,
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-        ),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 400,
-              child: Row(
-                children: [
-                  Column(
-                    children: [
-                      const CircleAvatar(
-                        radius: 27,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Expanded(
-                        child: VerticalDivider(
-                          color: Colors.grey.shade400,
-                          width: 30,
-                          thickness: 1,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const CircleAvatar(
-                        radius: 20,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 13,
-                  ),
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("data"),
-                            Text("data"),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          "Vine after seeing the Threads logo unveiled",
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                          clipBehavior: Clip.hardEdge,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Image.network(
-                            "https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg",
-                            height: 230,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        const Row(
-                          children: [
-                            FaIcon(
-                              FontAwesomeIcons.heart,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            FaIcon(
-                              FontAwesomeIcons.comment,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            FaIcon(
-                              FontAwesomeIcons.arrowsRotate,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            FaIcon(
-                              FontAwesomeIcons.paperPlane,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 35,
-                        ),
-                        const Text("2 replies • 63 likes")
-                      ],
-                    ),
-                  )
-                ],
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 20,
               ),
-            )
-          ],
+              SvgPicture.asset(
+                "assets/icons/threads.svg",
+                width: 40,
+              ),
+              const PostCard(
+                username: "Nico",
+                time: 3,
+                post: "안녕하세요!! 니콜라스입니닷!!!!",
+                imageUrl: [
+                  "https://i.imgur.com/0CfZLcI.png",
+                  "https://i.imgur.com/PgoOazS.png",
+                ],
+                avatarUrl: [
+                  "https://avatars.githubusercontent.com/u/3612017",
+                  "https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg",
+                  "https://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg",
+                  "https://src.hidoc.co.kr/image/lib/2021/4/28/1619598179113_0.jpg",
+                ],
+                replies: 201,
+                likes: 30,
+                certificate: true,
+              ),
+              const PostCard(
+                imageUrl: [],
+                username: "kdy",
+                time: 3,
+                post: "Hello Everyone",
+                avatarUrl: [
+                  "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                  "https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg",
+                  "https://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg",
+                  "https://src.hidoc.co.kr/image/lib/2021/4/28/1619598179113_0.jpg",
+                ],
+                likes: 20,
+                replies: 132,
+                certificate: false,
+              ),
+              const PostCard(
+                imageUrl: [
+                  "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                ],
+                username: "민지",
+                time: 3,
+                post: "",
+                avatarUrl: [
+                  "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                  "https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg",
+                  "https://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg",
+                  "https://src.hidoc.co.kr/image/lib/2021/4/28/1619598179113_0.jpg",
+                ],
+                likes: 99,
+                replies: 999,
+                certificate: true,
+              ),
+            ],
+          ),
         ),
       ),
     );
