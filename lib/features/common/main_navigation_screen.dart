@@ -16,6 +16,119 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     setState(() {});
   }
 
+  void _addPost() {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (context) => Container(
+        height: 800,
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            20,
+          ),
+        ),
+        child: Scaffold(
+          body: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                const Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "New thread",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "Cancel",
+                      style: TextStyle(
+                        fontSize: 20,
+                        // fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  height: 30,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircleAvatar(
+                          radius: 25,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                          height: 200,
+                          child: VerticalDivider(),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        CircleAvatar(
+                          radius: 18,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "kdy",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextField(
+                            maxLines: 5,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.grey.shade400,
+                              border: const OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                const Text("data"),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +169,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 ),
               ),
               GestureDetector(
-                onTap: () => _onMoveTap(2),
+                onTap: () {
+                  _onMoveTap(2);
+                  _addPost();
+                },
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   child: FaIcon(
