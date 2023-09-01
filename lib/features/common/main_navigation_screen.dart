@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter/features/home/home_screen.dart';
+import 'package:twitter/features/plus/widgets/add_thread_modal_bottom_sheet.dart';
+import 'package:twitter/features/search/search_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -10,7 +12,7 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   void _onMoveTap(int value) {
     _selectedIndex = value;
     setState(() {});
@@ -22,109 +24,14 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       backgroundColor: Colors.transparent,
       context: context,
       builder: (context) => Container(
-        height: 800,
+        height: 850,
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
             20,
           ),
         ),
-        child: Scaffold(
-          body: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-            ),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                const Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "New thread",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      "Cancel",
-                      style: TextStyle(
-                        fontSize: 20,
-                        // fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-                const Divider(
-                  height: 30,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CircleAvatar(
-                          radius: 25,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        SizedBox(
-                          height: 200,
-                          child: VerticalDivider(),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        CircleAvatar(
-                          radius: 18,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "kdy",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          TextField(
-                            maxLines: 5,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.grey.shade400,
-                              border: const OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                const Text("data"),
-              ],
-            ),
-          ),
-        ),
+        child: const AddThreadModalBottomSheet(),
       ),
     );
   }
@@ -170,7 +77,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  _onMoveTap(2);
+                  // _onMoveTap(2);
                   _addPost();
                 },
                 child: Container(
@@ -220,30 +127,19 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             offstage: _selectedIndex != 0,
             child: const HomeScreen(),
           ),
-          Offstage(
-            offstage: _selectedIndex != 1,
-            child: const Center(
-              child: Text(
-                "Search",
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ),
-          ),
-          Offstage(
-            offstage: _selectedIndex != 2,
-            child: const Center(
-              child: Text(
-                "Write",
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ),
-          ),
+          Offstage(offstage: _selectedIndex != 1, child: const SearchScreen()),
+          // Offstage(
+          //   offstage: _selectedIndex != 2,
+          //   child: const Center(
+          //     child: Text(
+          //       "Write",
+          //       style: TextStyle(
+          //         fontSize: 40,
+          //         fontWeight: FontWeight.w800,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Offstage(
             offstage: _selectedIndex != 3,
             child: const Center(
