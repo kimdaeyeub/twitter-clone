@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter/features/activity/activity_screen.dart';
 import 'package:twitter/features/home/home_screen.dart';
 import 'package:twitter/features/plus/widgets/add_thread_modal_bottom_sheet.dart';
 import 'package:twitter/features/search/search_screen.dart';
@@ -12,7 +13,7 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 3;
   void _onMoveTap(int value) {
     _selectedIndex = value;
     setState(() {});
@@ -142,15 +143,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           // ),
           Offstage(
             offstage: _selectedIndex != 3,
-            child: const Center(
-              child: Text(
-                "Likes",
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ),
+            child: const ActivityScreen(),
           ),
           Offstage(
             offstage: _selectedIndex != 4,
