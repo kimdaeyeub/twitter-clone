@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter/features/activity/widgets/activity_list_tile.dart';
+import 'package:twitter/features/activity/widgets/activity_tab.dart';
 
 class ActivityScreen extends StatefulWidget {
   const ActivityScreen({super.key});
@@ -33,8 +36,8 @@ class _ActivityScreenState extends State<ActivityScreen> {
               const Text(
                 "Activity",
                 style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.w800,
+                  fontSize: 40,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(
@@ -72,41 +75,112 @@ class _ActivityScreenState extends State<ActivityScreen> {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    const SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          ActivityListTile(
+                            icon: FontAwesomeIcons.user,
+                            color: Colors.pink,
+                            avatarImage:
+                                "https://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg",
+                            username: "kimdaeyeub",
+                            time: 3,
+                            title: "Hello",
+                            subtitle: "Follow",
+                          ),
+                          ActivityListTile(
+                            icon: FontAwesomeIcons.heart,
+                            color: Colors.deepPurple,
+                            avatarImage:
+                                "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                            username: "Minji",
+                            time: 3,
+                            title: "Mentioned you",
+                            subtitle:
+                                "Here's a thread you should follow if you love botany @jane_mobbin",
+                          ),
+                          ActivityListTile(
+                            icon: FontAwesomeIcons.user,
+                            color: Colors.pink,
+                            avatarImage:
+                                "https://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg",
+                            username: "kimdaeyeub",
+                            time: 3,
+                            title: "Hello",
+                            subtitle: "Follow",
+                          ),
+                          ActivityListTile(
+                            icon: FontAwesomeIcons.heart,
+                            color: Colors.deepPurple,
+                            avatarImage:
+                                "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                            username: "Minji",
+                            time: 3,
+                            title: "Mentioned you",
+                            subtitle:
+                                "Here's a thread you should follow if you love botany @jane_mobbin",
+                          ),
+                          ActivityListTile(
+                            icon: FontAwesomeIcons.user,
+                            color: Colors.pink,
+                            avatarImage:
+                                "https://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg",
+                            username: "kimdaeyeub",
+                            time: 3,
+                            title: "Hello",
+                            subtitle: "Follow",
+                          ),
+                          ActivityListTile(
+                            icon: FontAwesomeIcons.heart,
+                            color: Colors.deepPurple,
+                            avatarImage:
+                                "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                            username: "Minji",
+                            time: 3,
+                            title: "Mentioned you",
+                            subtitle:
+                                "Here's a thread you should follow if you love botany @jane_mobbin",
+                          ),
+                          ActivityListTile(
+                            icon: FontAwesomeIcons.user,
+                            color: Colors.pink,
+                            avatarImage:
+                                "https://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg",
+                            username: "kimdaeyeub",
+                            time: 3,
+                            title: "Hello",
+                            subtitle: "Follow",
+                          ),
+                          ActivityListTile(
+                            icon: FontAwesomeIcons.heart,
+                            color: Colors.deepPurple,
+                            avatarImage:
+                                "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                            username: "Minji",
+                            time: 3,
+                            title: "Mentioned you",
+                            subtitle:
+                                "Here's a thread you should follow if you love botany @jane_mobbin",
+                          ),
+                        ],
+                      ),
+                    ),
+                    for (var i = 0; i < 3; i++)
+                      const Center(
+                        child: Text("hello"),
+                      )
+                  ],
+                ),
               )
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class ActivityTab extends StatelessWidget {
-  final String text;
-  final bool isSelected;
-  const ActivityTab({
-    super.key,
-    required this.text,
-    required this.isSelected,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 150,
-      height: 80,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: isSelected ? Colors.black : null,
-        border: isSelected ? null : Border.all(color: Colors.grey.shade400),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: isSelected ? Colors.white : Colors.black,
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
         ),
       ),
     );

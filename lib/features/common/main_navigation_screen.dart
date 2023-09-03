@@ -97,7 +97,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   child: FaIcon(
-                    FontAwesomeIcons.heart,
+                    _selectedIndex == 3
+                        ? FontAwesomeIcons.solidHeart
+                        : FontAwesomeIcons.heart,
                     size: 28,
                     color: _selectedIndex == 3
                         ? Colors.black

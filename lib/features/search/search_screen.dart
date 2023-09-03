@@ -34,28 +34,71 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 15,
               ),
               CupertinoSearchTextField(),
-              SizedBox(
-                height: 30,
-              ),
-              SearchScreenListTile(
-                username: "KimDaeYeub",
-                description: "Very Cool Guy",
-                userImage:
-                    "https://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg",
-                comment: "89K followers",
-                commentImage: "",
-              ),
-              SearchScreenListTile(
-                username: "asdasdk",
-                description: "Very Cool Guy",
-                userImage:
-                    "https://src.hidoc.co.kr/image/lib/2021/4/28/1619598179113_0.jpg",
-                comment: "200K followers",
-                commentImage:
-                    "https://image.edaily.co.kr/images/Photo/files/NP/S/2017/07/PS17072900100.jpg",
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 30,
+                      ),
+                      SearchScreenListTile(
+                        username: "KimDaeYeub",
+                        description: "Very Cool Guy",
+                        userImage:
+                            "https://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg",
+                        comment: "89K followers",
+                        commentImage: "",
+                      ),
+                      SearchScreenListTile(
+                        username: "asdasdk",
+                        description: "Very Cool Guy",
+                        userImage:
+                            "https://src.hidoc.co.kr/image/lib/2021/4/28/1619598179113_0.jpg",
+                        comment: "200K followers",
+                        commentImage:
+                            "https://image.edaily.co.kr/images/Photo/files/NP/S/2017/07/PS17072900100.jpg",
+                      ),
+                      SearchScreenListTile(
+                        username: "KimDaeYeub",
+                        description: "Very Cool Guy",
+                        userImage:
+                            "https://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg",
+                        comment: "89K followers",
+                        commentImage: "",
+                      ),
+                      SearchScreenListTile(
+                        username: "asdasdk",
+                        description: "Very Cool Guy",
+                        userImage:
+                            "https://src.hidoc.co.kr/image/lib/2021/4/28/1619598179113_0.jpg",
+                        comment: "200K followers",
+                        commentImage:
+                            "https://image.edaily.co.kr/images/Photo/files/NP/S/2017/07/PS17072900100.jpg",
+                      ),
+                      SearchScreenListTile(
+                        username: "KimDaeYeub",
+                        description: "Very Cool Guy",
+                        userImage:
+                            "https://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg",
+                        comment: "89K followers",
+                        commentImage: "",
+                      ),
+                      SearchScreenListTile(
+                        username: "asdasdk",
+                        description: "Very Cool Guy",
+                        userImage:
+                            "https://src.hidoc.co.kr/image/lib/2021/4/28/1619598179113_0.jpg",
+                        comment: "200K followers",
+                        commentImage:
+                            "https://image.edaily.co.kr/images/Photo/files/NP/S/2017/07/PS17072900100.jpg",
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
