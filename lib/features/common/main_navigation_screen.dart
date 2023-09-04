@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter/features/activity/activity_screen.dart';
 import 'package:twitter/features/home/home_screen.dart';
 import 'package:twitter/features/plus/widgets/add_thread_modal_bottom_sheet.dart';
+import 'package:twitter/features/profile/profile_screen.dart';
 import 'package:twitter/features/search/search_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -149,15 +150,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndex != 4,
-            child: const Center(
-              child: Text(
-                "Profile",
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-            ),
+            child: const ProfileScreen(),
           )
         ],
       ),
