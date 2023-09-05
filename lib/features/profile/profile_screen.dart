@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter/features/common/widgets/post_card.dart';
+import 'package:twitter/features/profile/widgets/custom_persistent_header.dart';
+import 'package:twitter/features/profile/widgets/profile_list_tile.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -133,13 +135,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             alignment: Alignment.centerLeft,
                                             child: CircleAvatar(
                                               radius: 20,
-                                              backgroundColor: Colors.pink,
+                                              foregroundImage: NetworkImage(
+                                                "https://img.freepik.com/free-vector/pretty-night-landscape-watercolor-background-with-stars_23-2147658499.jpg",
+                                              ),
                                             ),
                                           ),
                                           Align(
                                             alignment: Alignment.centerRight,
                                             child: CircleAvatar(
                                               radius: 20,
+                                              foregroundImage: NetworkImage(
+                                                "https://mblogthumb-phinf.pstatic.net/MjAxODEwMTJfMTI2/MDAxNTM5MjcwODAwOTEy.LOiaGHZPq1q_sOc0d0BF_xd8_YT-23rvAdPisysoOqEg.SUhDZiPnD0Ugj0xZYxCJRmbjIJAVIs242UaHB3Amr9kg.PNG.mentorkh/%EC%98%88%EC%81%9C%ED%95%98%EB%8A%98_%EA%B0%90%EC%84%B1%EC%9D%B4%EB%AF%B8%EC%A7%80_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4__%2820%29.png?type=w800",
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -161,6 +168,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             const CircleAvatar(
                               radius: 35,
+                              foregroundImage: NetworkImage(
+                                "https://mblogthumb-phinf.pstatic.net/MjAxODEwMTJfMjgz/MDAxNTM5MjcwNzk5NDMz._RguaLGCU8YJg8-bjtjSYl64y6hZ8Twk0bn_Q3436iog.FXXHZM-E9K8AKuzoum4zbzL3-3oMnMLWSVRRV_IoGMwg.PNG.mentorkh/%EC%98%88%EC%81%9C%ED%95%98%EB%8A%98_%EA%B0%90%EC%84%B1%EC%9D%B4%EB%AF%B8%EC%A7%80_%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4__%281%29.png?type=w800",
+                              ),
                             ),
                           ],
                         ),
@@ -231,16 +241,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ];
             },
-            body: const TabBarView(
+            body: TabBarView(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     vertical: 20,
                   ),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        ProfileScreenListTile(
+                        const ProfileScreenListTile(
                           myname: "jane_mobbin",
                           myImage:
                               "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
@@ -254,285 +264,90 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           replyText:
                               "I'm just going to say what we are all thinking and knowing is about to go downity down: There is about to be some piping hot tea spillage on here daily that people will be",
                           replyCount: 200,
+                          replyImage:
+                              "https://www.vogue.co.kr/wp_data/vogue/2017/03/style_58d5042e102a9.jpg",
+                        ),
+                        Divider(
+                          height: 30,
+                          color: Colors.grey.shade300,
+                          thickness: 1,
+                        ),
+                        const ProfileScreenListTile(
+                          myname: "jane_mobbin",
+                          myImage:
+                              "https://i.pinimg.com/originals/d4/a3/12/d4a312cc3d977468137ec857a84fd4e1.jpg",
+                          time: 3,
+                          myText:
+                              "Give @john_mobbin a follow if you want to see more travel content!",
+                          hasReplies: false,
+                          replyUsername: "Daeyeub",
+                          replyUserImage:
+                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                          replyText:
+                              "I'm just going to say what we are all thinking and knowing is about to go downity down: There is about to be some piping hot tea spillage on here daily that people will be",
+                          replyCount: 200,
+                          replyImage:
+                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
                         ),
                       ],
                     ),
                   ),
                 ),
-                Center(
-                  child: Text(
-                    "Replies",
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 20,
                   ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ProfileScreenListTile extends StatelessWidget {
-  final String myname;
-  final String myImage;
-  final int time;
-  final String myText;
-  final bool hasReplies;
-  final String replyUsername;
-  final String replyUserImage;
-  final String replyText;
-  final int replyCount;
-  const ProfileScreenListTile({
-    super.key,
-    required this.myname,
-    required this.myImage,
-    required this.time,
-    required this.myText,
-    required this.hasReplies,
-    required this.replyUsername,
-    required this.replyUserImage,
-    required this.replyText,
-    required this.replyCount,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      titleAlignment: ListTileTitleAlignment.top,
-      leading: const CircleAvatar(
-        radius: 25,
-      ),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text(
-            "Jane_mobbin",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-            ),
-          ),
-          Row(
-            children: [
-              Text(
-                "3h",
-                style: TextStyle(
-                  color: Colors.grey.shade400,
-                  fontSize: 17,
-                ),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              const FaIcon(
-                FontAwesomeIcons.ellipsis,
-              ),
-            ],
-          )
-        ],
-      ),
-      subtitle: DefaultTextStyle(
-        style: const TextStyle(
-          color: Colors.black,
-        ),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 10,
-            ),
-            const Text(
-              "Give @john_mobbin a follow if you want to see more travel content!",
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 17,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            FractionallySizedBox(
-              widthFactor: 1,
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 20,
-                  horizontal: 20,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: Colors.grey.shade400,
-                  ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                  child: SingleChildScrollView(
+                    child: Column(
                       children: [
-                        CircleAvatar(
-                          radius: 12,
+                        const ProfileScreenListTile(
+                          myname: "jane_mobbin",
+                          myImage:
+                              "https://i.pinimg.com/originals/d4/a3/12/d4a312cc3d977468137ec857a84fd4e1.jpg",
+                          time: 3,
+                          myText:
+                              "Give @john_mobbin a follow if you want to see more travel content!",
+                          hasReplies: false,
+                          replyUsername: "Minji",
+                          replyUserImage:
+                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                          replyText:
+                              "I'm just going to say what we are all thinking and knowing is about to go downity down: There is about to be some piping hot tea spillage on here daily that people will be",
+                          replyCount: 200,
+                          replyImage:
+                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
                         ),
-                        SizedBox(
-                          width: 10,
+                        const ProfileScreenListTile(
+                          myname: "jane_mobbin",
+                          myImage:
+                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                          time: 3,
+                          myText:
+                              "Give @john_mobbin a follow if you want to see more travel content!",
+                          hasReplies: true,
+                          replyUsername: "Minji",
+                          replyUserImage:
+                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                          replyText:
+                              "I'm just going to say what we are all thinking and knowing is about to go downity down: There is about to be some piping hot tea spillage on here daily that people will be",
+                          replyCount: 200,
+                          replyImage:
+                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
                         ),
-                        Text(
-                          "earthpix",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: Stack(
-                            children: [
-                              Align(
-                                alignment: Alignment.center,
-                                child: FaIcon(
-                                  FontAwesomeIcons.certificate,
-                                  color: Colors.blue,
-                                  size: 15,
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: FaIcon(
-                                  FontAwesomeIcons.check,
-                                  color: Colors.white,
-                                  size: 8,
-                                ),
-                              ),
-                            ],
-                          ),
+                        Divider(
+                          height: 30,
+                          color: Colors.grey.shade300,
+                          thickness: 1,
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Text(
-                      "I'm just going to say what we are all thinking and knowing is about to go downity down: There is about to be some piping hot tea spillage on here daily that people will be",
-                      style: TextStyle(
-                        fontSize: 17,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    FractionallySizedBox(
-                      widthFactor: 1,
-                      child: Image.network(
-                        "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Text(
-                      "256 replies",
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Row(
-              children: [
-                FaIcon(
-                  FontAwesomeIcons.heart,
-                  color: Colors.black,
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                FaIcon(
-                  FontAwesomeIcons.comment,
-                  color: Colors.black,
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                FaIcon(
-                  FontAwesomeIcons.arrowsRotate,
-                  color: Colors.black,
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                FaIcon(
-                  color: Colors.black,
-                  FontAwesomeIcons.paperPlane,
+                  ),
                 ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );
-  }
-}
-
-class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-      ),
-      child: TabBar(
-        indicatorSize: TabBarIndicatorSize.label,
-        indicatorColor: Theme.of(context).tabBarTheme.indicatorColor,
-        labelPadding: const EdgeInsets.symmetric(
-          vertical: 15,
-        ),
-        tabs: const [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 15,
-            ),
-            child: Text(
-              "Threads",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 20,
-            ),
-            child: Text(
-              "Replies",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  double get maxExtent => 56;
-
-  @override
-  double get minExtent => 56;
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return false;
   }
 }

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:twitter/features/home/widgets/report_screen.dart';
 
 class EllpsisBottomSheet extends StatelessWidget {
-  EllpsisBottomSheet({super.key});
-  final GlobalKey<NavigatorState> _key = GlobalKey<NavigatorState>();
+  const EllpsisBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
