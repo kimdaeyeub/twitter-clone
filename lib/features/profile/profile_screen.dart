@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter/features/common/widgets/post_card.dart';
+import 'package:twitter/features/profile/settings_screen.dart';
 import 'package:twitter/features/profile/widgets/custom_persistent_header.dart';
 import 'package:twitter/features/profile/widgets/profile_list_tile.dart';
 
@@ -12,6 +12,14 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  void _onMoveSettingsScreen() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const SettingsScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,31 +29,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: NestedScrollView(
             headerSliverBuilder: (context, innerBoxIsScrolled) {
               return [
-                const SliverAppBar(
+                SliverAppBar(
                   title: Padding(
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 20,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        FaIcon(
+                        const FaIcon(
                           FontAwesomeIcons.globe,
                           size: 30,
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            FaIcon(
+                            const FaIcon(
                               FontAwesomeIcons.instagram,
                               size: 30,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
-                            FaIcon(
-                              FontAwesomeIcons.barsStaggered,
-                              size: 30,
+                            GestureDetector(
+                              onTap: _onMoveSettingsScreen,
+                              child: const FaIcon(
+                                FontAwesomeIcons.barsStaggered,
+                                size: 30,
+                              ),
                             ),
                           ],
                         )
@@ -276,7 +287,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           myname: "jane_mobbin",
                           myImage:
                               "https://i.pinimg.com/originals/d4/a3/12/d4a312cc3d977468137ec857a84fd4e1.jpg",
-                          time: 3,
+                          time: 5,
                           myText:
                               "Give @john_mobbin a follow if you want to see more travel content!",
                           hasReplies: false,
@@ -304,27 +315,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           myname: "jane_mobbin",
                           myImage:
                               "https://i.pinimg.com/originals/d4/a3/12/d4a312cc3d977468137ec857a84fd4e1.jpg",
-                          time: 3,
+                          time: 2,
                           myText:
                               "Give @john_mobbin a follow if you want to see more travel content!",
                           hasReplies: false,
-                          replyUsername: "Minji",
-                          replyUserImage:
-                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
-                          replyText:
-                              "I'm just going to say what we are all thinking and knowing is about to go downity down: There is about to be some piping hot tea spillage on here daily that people will be",
-                          replyCount: 200,
-                          replyImage:
-                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
-                        ),
-                        const ProfileScreenListTile(
-                          myname: "jane_mobbin",
-                          myImage:
-                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
-                          time: 3,
-                          myText:
-                              "Give @john_mobbin a follow if you want to see more travel content!",
-                          hasReplies: true,
                           replyUsername: "Minji",
                           replyUserImage:
                               "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
@@ -338,6 +332,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           height: 30,
                           color: Colors.grey.shade300,
                           thickness: 1,
+                        ),
+                        const ProfileScreenListTile(
+                          myname: "jane_mobbin",
+                          myImage:
+                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                          time: 9,
+                          myText:
+                              "Give @john_mobbin a follow if you want to see more travel content!",
+                          hasReplies: true,
+                          replyUsername: "Minji",
+                          replyUserImage:
+                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                          replyText:
+                              "I'm just going to say what we are all thinking and knowing is about to go downity down: There is about to be some piping hot tea spillage on here daily that people will be",
+                          replyCount: 200,
+                          replyImage:
+                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
                         ),
                       ],
                     ),

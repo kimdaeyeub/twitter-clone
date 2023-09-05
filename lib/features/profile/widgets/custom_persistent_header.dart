@@ -9,7 +9,7 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
         color: Color.fromARGB(255, 248, 248, 248),
       ),
       child: const TabBar(
-        labelColor: Colors.black,
+        indicatorColor: Colors.black,
         labelPadding: EdgeInsets.symmetric(
           vertical: 15,
         ),

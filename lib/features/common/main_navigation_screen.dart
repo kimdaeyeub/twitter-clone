@@ -14,7 +14,8 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _selectedIndex = 3;
+  final GlobalKey<NavigatorState> _key = GlobalKey<NavigatorState>();
+  int _selectedIndex = 4;
   void _onMoveTap(int value) {
     _selectedIndex = value;
     setState(() {});
@@ -150,7 +151,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndex != 4,
-            child: const ProfileScreen(),
+            child: Navigator(
+              key: _key,
+              onGenerateRoute: (settings) => MaterialPageRoute(
+                builder: (context) => const ProfileScreen(),
+              ),
+            ),
           )
         ],
       ),
