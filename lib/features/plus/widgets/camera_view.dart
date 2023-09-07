@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +16,14 @@ class CameraViewScreen extends StatefulWidget {
 class _CameraViewState extends State<CameraViewScreen> {
   bool _hasPermission = false;
   bool _turnOnFlash = false;
+  bool _isSelfiMode = false;
+  XFile? _xFile;
   late FlashMode _flashMode;
   void _onMoveBack() {
     Navigator.of(context).pop();
   }
 
-  late final CameraController _cameraController;
+  late CameraController _cameraController;
 
   Future<void> initCamera() async {
     final cameras = await availableCameras();
@@ -29,7 +33,7 @@ class _CameraViewState extends State<CameraViewScreen> {
     }
 
     _cameraController = CameraController(
-      cameras[0],
+      cameras[_isSelfiMode ? 1 : 0],
       ResolutionPreset.ultraHigh,
     );
 
@@ -65,10 +69,27 @@ class _CameraViewState extends State<CameraViewScreen> {
     setState(() {});
   }
 
+  Future<void> _toggleSelfiMode() async {
+    _isSelfiMode = !_isSelfiMode;
+    await initCamera();
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
     initPermissions();
+  }
+
+  Future<void> _takePicture() async {
+    final xFile = await _cameraController.takePicture();
+    _xFile = xFile;
+    setState(() {});
+  }
+
+  void _resetImage() {
+    _xFile = null;
+    setState(() {});
   }
 
   @override
@@ -80,7 +101,45 @@ class _CameraViewState extends State<CameraViewScreen> {
         child: Stack(
           children: [
             _hasPermission && _cameraController.value.isInitialized
-                ? CameraPreview(_cameraController)
+                ? _xFile == null
+                    ? CameraPreview(_cameraController)
+                    : Stack(
+                        children: [
+                          Image.file(
+                            File(
+                              _xFile!.path.toString(),
+                            ),
+                          ),
+                          Positioned(
+                            top: 65,
+                            right: 15,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Text(
+                                  "사용하기",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                GestureDetector(
+                                  onTap: _resetImage,
+                                  child: const FaIcon(
+                                    FontAwesomeIcons.xmark,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
                 : Positioned.fill(
                     child: Container(
                       color: Colors.amber,
@@ -132,21 +191,27 @@ class _CameraViewState extends State<CameraViewScreen> {
                               shape: BoxShape.circle,
                             ),
                           ),
-                          Container(
-                            height: 75,
-                            width: 75,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
+                          GestureDetector(
+                            onTap: _takePicture,
+                            child: Container(
+                              height: 75,
+                              width: 75,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const FaIcon(
-                      FontAwesomeIcons.rotate,
-                      color: Colors.white,
-                      size: 28,
+                    GestureDetector(
+                      onTap: _toggleSelfiMode,
+                      child: const FaIcon(
+                        FontAwesomeIcons.rotate,
+                        color: Colors.white,
+                        size: 28,
+                      ),
                     ),
                   ],
                 ),
