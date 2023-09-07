@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter/features/plus/add_thread_screen.dart';
 
 class AddThreadModalBottomSheet extends StatefulWidget {
   const AddThreadModalBottomSheet({
@@ -23,6 +24,14 @@ class _AddThreadModalBottomSheetState extends State<AddThreadModalBottomSheet> {
       _text = _textController.text;
       setState(() {});
     });
+  }
+
+  void _onAddThreadsScreen() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const AddThreadsScreen(),
+      ),
+    );
   }
 
   @override
@@ -139,10 +148,13 @@ class _AddThreadModalBottomSheetState extends State<AddThreadModalBottomSheet> {
                                 ),
                               ),
                             ),
-                            FaIcon(
-                              FontAwesomeIcons.paperclip,
-                              color: Colors.grey.shade400,
-                              size: 25,
+                            GestureDetector(
+                              onTap: _onAddThreadsScreen,
+                              child: FaIcon(
+                                FontAwesomeIcons.paperclip,
+                                color: Colors.grey.shade400,
+                                size: 25,
+                              ),
                             ),
                           ],
                         ),

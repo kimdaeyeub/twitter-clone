@@ -15,7 +15,7 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   final GlobalKey<NavigatorState> _key = GlobalKey<NavigatorState>();
-  int _selectedIndex = 4;
+  int _selectedIndex = 1;
   void _onMoveTap(int value) {
     _selectedIndex = value;
     setState(() {});
