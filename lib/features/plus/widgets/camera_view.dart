@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class CameraViewScreen extends StatefulWidget {
@@ -89,6 +90,13 @@ class _CameraViewState extends State<CameraViewScreen> {
 
   void _resetImage() {
     _xFile = null;
+    setState(() {});
+  }
+
+  Future<void> _getImageFromGallery() async {
+    final xFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    print(xFile);
+    _xFile = xFile;
     setState(() {});
   }
 
