@@ -29,7 +29,7 @@ class PostCard extends StatelessWidget {
       backgroundColor: Colors.transparent,
       context: context,
       isScrollControlled: true,
-      builder: (context) => EllpsisBottomSheet(),
+      builder: (context) => const EllpsisBottomSheet(),
     );
   }
 

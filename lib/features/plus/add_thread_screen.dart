@@ -20,8 +20,13 @@ class _AddThreadsScreenState extends State<AddThreadsScreen> {
   bool _isSelfiMode = false;
   XFile? _xFile;
   late FlashMode _flashMode;
+
   void _onMoveBack() {
-    Navigator.of(context).pop();
+    if (_xFile != null) {
+      Navigator.of(context).pop(_xFile);
+    } else {
+      Navigator.of(context).pop();
+    }
   }
 
   late CameraController _cameraController;
@@ -95,9 +100,9 @@ class _AddThreadsScreenState extends State<AddThreadsScreen> {
 
   Future<void> _getImageFromGallery() async {
     final xFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-    print(xFile);
     _xFile = xFile;
     setState(() {});
+    _onMoveBack();
   }
 
   @override
@@ -130,48 +135,57 @@ class _AddThreadsScreenState extends State<AddThreadsScreen> {
                       _hasPermission && _cameraController.value.isInitialized
                           ? _xFile == null
                               ? CameraPreview(_cameraController)
-                              : Stack(
-                                  children: [
-                                    Image.file(
-                                      File(
-                                        _xFile!.path.toString(),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      top: 65,
-                                      right: 15,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          const Text(
-                                            "사용하기",
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 20,
-                                          ),
-                                          GestureDetector(
-                                            onTap: _resetImage,
-                                            child: const FaIcon(
-                                              FontAwesomeIcons.xmark,
-                                              color: Colors.white,
-                                              size: 30,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                              : Image.file(
+                                  File(
+                                    _xFile!.path,
+                                  ),
                                 )
                           : Positioned.fill(
                               child: Container(
-                                color: Colors.amber,
+                                color: const Color(0xff171713),
                               ),
                             ),
+                      if (_xFile != null)
+                        Positioned(
+                          top: 65,
+                          right: 15,
+                          child: Row(
+                            children: [
+                              GestureDetector(
+                                onTap: _onMoveBack,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 15,
+                                    vertical: 8,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: const Text(
+                                    "Add",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 30,
+                              ),
+                              GestureDetector(
+                                onTap: _resetImage,
+                                child: const FaIcon(
+                                  FontAwesomeIcons.xmark,
+                                  color: Colors.white,
+                                  size: 25,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       Positioned(
                         top: 65,
                         left: 15,
@@ -195,9 +209,11 @@ class _AddThreadsScreenState extends State<AddThreadsScreen> {
                             children: [
                               GestureDetector(
                                 onTap: () => _setFlashMode(),
-                                child: const FaIcon(
+                                child: FaIcon(
                                   FontAwesomeIcons.bolt,
-                                  color: Colors.white,
+                                  color: _turnOnFlash
+                                      ? Colors.amber.shade400
+                                      : Colors.white,
                                   size: 28,
                                 ),
                               ),
@@ -260,16 +276,19 @@ class _AddThreadsScreenState extends State<AddThreadsScreen> {
                 ),
               ),
             ),
-            const Align(
-              alignment: Alignment.bottomRight,
-              child: Padding(
-                padding: EdgeInsets.only(right: 50),
-                child: Text(
-                  "Library",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+            GestureDetector(
+              onTap: _getImageFromGallery,
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 50),
+                  child: Text(
+                    "Library",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey.shade500,
+                    ),
                   ),
                 ),
               ),

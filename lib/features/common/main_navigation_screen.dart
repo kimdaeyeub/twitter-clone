@@ -15,7 +15,7 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   final GlobalKey<NavigatorState> _key = GlobalKey<NavigatorState>();
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
   void _onMoveTap(int value) {
     _selectedIndex = value;
     setState(() {});
@@ -131,8 +131,14 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           Offstage(
             offstage: _selectedIndex != 0,
             child: const HomeScreen(),
+            // child: const Center(
+            //   child: Text("Hello"),
+            // ),
           ),
-          Offstage(offstage: _selectedIndex != 1, child: const SearchScreen()),
+          Offstage(
+            offstage: _selectedIndex != 1,
+            child: const SearchScreen(),
+          ),
           // Offstage(
           //   offstage: _selectedIndex != 2,
           //   child: const Center(

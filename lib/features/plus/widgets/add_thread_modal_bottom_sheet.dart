@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter/features/plus/add_thread_screen.dart';
@@ -16,6 +19,7 @@ class _AddThreadModalBottomSheetState extends State<AddThreadModalBottomSheet> {
   final TextEditingController _textController = TextEditingController();
 
   String _text = "";
+  XFile? _xFile;
 
   @override
   void initState() {
@@ -26,12 +30,14 @@ class _AddThreadModalBottomSheetState extends State<AddThreadModalBottomSheet> {
     });
   }
 
-  void _onAddThreadsScreen() {
-    Navigator.of(context).push(
+  void _onAddThreadsScreen() async {
+    final result = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const AddThreadsScreen(),
       ),
     );
+    _xFile = result;
+    setState(() {});
   }
 
   @override
@@ -39,6 +45,33 @@ class _AddThreadModalBottomSheetState extends State<AddThreadModalBottomSheet> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Stack(
+            children: [
+              const Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "New thread",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: const Text(
+                  "Cancel",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
@@ -48,35 +81,11 @@ class _AddThreadModalBottomSheetState extends State<AddThreadModalBottomSheet> {
             children: [
               Column(
                 children: [
+                  const Divider(
+                      // height: 30,
+                      ),
                   const SizedBox(
                     height: 20,
-                  ),
-                  Stack(
-                    children: [
-                      const Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          "New thread",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
-                        child: const Text(
-                          "Cancel",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Divider(
-                    height: 30,
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,6 +156,24 @@ class _AddThreadModalBottomSheetState extends State<AddThreadModalBottomSheet> {
                                   borderSide: BorderSide.none,
                                 ),
                               ),
+                            ),
+                            if (_xFile != null) ...[
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Container(
+                                height: 200,
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Image.file(
+                                  File(_xFile!.path),
+                                ),
+                              ),
+                            ],
+                            const SizedBox(
+                              height: 20,
                             ),
                             GestureDetector(
                               onTap: _onAddThreadsScreen,
