@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter/features/profile/widgets/custom_appbar.dart';
 import 'package:twitter/features/profile/widgets/privacy_list_tile.dart';
+import 'package:twitter/utils.dart';
 
 class PrivacyScreen extends StatefulWidget {
   const PrivacyScreen({super.key});
@@ -20,11 +21,15 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return SafeArea(
       child: Scaffold(
         body: Column(
           children: [
-            const CustomAppBar(title: "Privacy"),
+            CustomAppBar(
+              title: "Privacy",
+              isDark: isDark,
+            ),
             const SizedBox(
               height: 10,
             ),
@@ -36,6 +41,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
               ),
               title: "Private profile",
               icon: FontAwesomeIcons.lock,
+              isDark: isDark,
             ),
             PrivacyListTile(
               trailingWidget: Row(
@@ -53,13 +59,14 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                   ),
                   FaIcon(
                     FontAwesomeIcons.chevronRight,
-                    color: Colors.grey.shade500,
+                    color: isDark ? Colors.white : Colors.grey.shade500,
                     size: 18,
                   )
                 ],
               ),
               title: "Mentions",
               icon: FontAwesomeIcons.at,
+              isDark: isDark,
             ),
             PrivacyListTile(
               title: "Muted",
@@ -69,6 +76,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                 color: Colors.grey.shade500,
                 size: 18,
               ),
+              isDark: isDark,
             ),
             PrivacyListTile(
               title: "Hidden Words",
@@ -78,6 +86,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                 color: Colors.grey.shade500,
                 size: 18,
               ),
+              isDark: isDark,
             ),
             PrivacyListTile(
               title: "Profiles you follow",
@@ -87,6 +96,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                 color: Colors.grey.shade500,
                 size: 18,
               ),
+              isDark: isDark,
             ),
             const Divider(
               height: 20,
@@ -126,6 +136,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                 color: Colors.grey.shade500,
                 size: 18,
               ),
+              isDark: isDark,
             ),
             PrivacyListTile(
               title: "Hide likes",
@@ -135,6 +146,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                 color: Colors.grey.shade500,
                 size: 18,
               ),
+              isDark: isDark,
             )
           ],
         ),

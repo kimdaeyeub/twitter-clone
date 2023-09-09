@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter/features/profile/settings_screen.dart';
 import 'package:twitter/features/profile/widgets/custom_persistent_header.dart';
 import 'package:twitter/features/profile/widgets/profile_list_tile.dart';
+import 'package:twitter/utils.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -22,6 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Scaffold(
       body: SafeArea(
         child: DefaultTabController(
@@ -106,7 +108,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                     Container(
                                       decoration: BoxDecoration(
-                                        color: Colors.grey.shade200,
+                                        color: isDark
+                                            ? Colors.grey.shade800
+                                            : Colors.grey.shade200,
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       padding: const EdgeInsets.symmetric(
@@ -116,7 +120,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       child: Text(
                                         "threads.net",
                                         style: TextStyle(
-                                          color: Colors.grey.shade600,
+                                          color: isDark
+                                              ? Colors.grey.shade300
+                                              : Colors.grey.shade600,
                                         ),
                                       ),
                                     )
@@ -248,59 +254,68 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 SliverPersistentHeader(
                   pinned: true,
-                  delegate: CustomPersistentHeader(),
+                  delegate: CustomPersistentHeader(
+                    isDark: isDark,
+                  ),
                 ),
               ];
             },
             body: TabBarView(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
+                  padding: const EdgeInsets.only(
+                    top: 20,
                   ),
                   child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const ProfileScreenListTile(
-                          myname: "jane_mobbin",
-                          myImage:
-                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
-                          time: 3,
-                          myText:
-                              "Give @john_mobbin a follow if you want to see more travel content!",
-                          hasReplies: true,
-                          replyUsername: "Minji",
-                          replyUserImage:
-                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
-                          replyText:
-                              "I'm just going to say what we are all thinking and knowing is about to go downity down: There is about to be some piping hot tea spillage on here daily that people will be",
-                          replyCount: 200,
-                          replyImage:
-                              "https://www.vogue.co.kr/wp_data/vogue/2017/03/style_58d5042e102a9.jpg",
-                        ),
-                        Divider(
-                          height: 30,
-                          color: Colors.grey.shade300,
-                          thickness: 1,
-                        ),
-                        const ProfileScreenListTile(
-                          myname: "jane_mobbin",
-                          myImage:
-                              "https://i.pinimg.com/originals/d4/a3/12/d4a312cc3d977468137ec857a84fd4e1.jpg",
-                          time: 5,
-                          myText:
-                              "Give @john_mobbin a follow if you want to see more travel content!",
-                          hasReplies: false,
-                          replyUsername: "Daeyeub",
-                          replyUserImage:
-                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
-                          replyText:
-                              "I'm just going to say what we are all thinking and knowing is about to go downity down: There is about to be some piping hot tea spillage on here daily that people will be",
-                          replyCount: 200,
-                          replyImage:
-                              "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
-                        ),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: 10,
+                      ),
+                      child: Column(
+                        children: [
+                          ProfileScreenListTile(
+                            myname: "jane_mobbin",
+                            myImage:
+                                "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                            time: 3,
+                            myText:
+                                "Give @john_mobbin a follow if you want to see more travel content!",
+                            hasReplies: true,
+                            replyUsername: "Minji",
+                            replyUserImage:
+                                "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                            replyText:
+                                "I'm just going to say what we are all thinking and knowing is about to go downity down: There is about to be some piping hot tea spillage on here daily that people will be",
+                            replyCount: 200,
+                            replyImage:
+                                "https://www.vogue.co.kr/wp_data/vogue/2017/03/style_58d5042e102a9.jpg",
+                            isDark: isDark,
+                          ),
+                          Divider(
+                            height: 30,
+                            color: Colors.grey.shade300,
+                            thickness: 1,
+                          ),
+                          ProfileScreenListTile(
+                            myname: "jane_mobbin",
+                            myImage:
+                                "https://i.pinimg.com/originals/d4/a3/12/d4a312cc3d977468137ec857a84fd4e1.jpg",
+                            time: 5,
+                            myText:
+                                "Give @john_mobbin a follow if you want to see more travel content!",
+                            hasReplies: false,
+                            replyUsername: "Daeyeub",
+                            replyUserImage:
+                                "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                            replyText:
+                                "I'm just going to say what we are all thinking and knowing is about to go downity down: There is about to be some piping hot tea spillage on here daily that people will be",
+                            replyCount: 200,
+                            replyImage:
+                                "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                            isDark: isDark,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -311,7 +326,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        const ProfileScreenListTile(
+                        ProfileScreenListTile(
                           myname: "jane_mobbin",
                           myImage:
                               "https://i.pinimg.com/originals/d4/a3/12/d4a312cc3d977468137ec857a84fd4e1.jpg",
@@ -327,13 +342,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           replyCount: 200,
                           replyImage:
                               "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                          isDark: isDark,
                         ),
                         Divider(
                           height: 30,
                           color: Colors.grey.shade300,
                           thickness: 1,
                         ),
-                        const ProfileScreenListTile(
+                        ProfileScreenListTile(
                           myname: "jane_mobbin",
                           myImage:
                               "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
@@ -349,6 +365,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           replyCount: 200,
                           replyImage:
                               "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
+                          isDark: isDark,
                         ),
                       ],
                     ),

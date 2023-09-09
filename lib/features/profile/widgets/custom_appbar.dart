@@ -3,9 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String title;
+  final bool isDark;
   const CustomAppBar({
     super.key,
     required this.title,
+    required this.isDark,
   });
 
   @override
@@ -29,7 +31,7 @@ class CustomAppBar extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () => Navigator.of(context).pop(),
-              child: const Align(
+              child: Align(
                 alignment: Alignment.centerLeft,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -37,11 +39,12 @@ class CustomAppBar extends StatelessWidget {
                     FaIcon(
                       FontAwesomeIcons.chevronLeft,
                       size: 18,
+                      color: isDark ? Colors.grey.shade400 : null,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 8,
                     ),
-                    Text(
+                    const Text(
                       "Back",
                       style: TextStyle(
                         fontSize: 20,

@@ -5,6 +5,7 @@ import 'package:twitter/features/home/home_screen.dart';
 import 'package:twitter/features/plus/widgets/add_thread_modal_bottom_sheet.dart';
 import 'package:twitter/features/profile/profile_screen.dart';
 import 'package:twitter/features/search/search_screen.dart';
+import 'package:twitter/utils.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -41,8 +42,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
+        color: isDark ? Colors.grey.shade900 : null,
         elevation: 1,
         child: Container(
           padding: const EdgeInsets.symmetric(
@@ -60,8 +63,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                     FontAwesomeIcons.house,
                     size: 28,
                     color: _selectedIndex == 0
-                        ? Colors.black
-                        : Colors.grey.shade500,
+                        ? isDark
+                            ? Colors.white
+                            : Colors.black
+                        : isDark
+                            ? Colors.grey.shade700
+                            : Colors.grey.shade500,
                   ),
                 ),
               ),
@@ -73,8 +80,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                     FontAwesomeIcons.magnifyingGlass,
                     size: 28,
                     color: _selectedIndex == 1
-                        ? Colors.black
-                        : Colors.grey.shade500,
+                        ? isDark
+                            ? Colors.white
+                            : Colors.black
+                        : isDark
+                            ? Colors.grey.shade700
+                            : Colors.grey.shade500,
                   ),
                 ),
               ),
@@ -89,8 +100,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                     FontAwesomeIcons.penToSquare,
                     size: 28,
                     color: _selectedIndex == 2
-                        ? Colors.black
-                        : Colors.grey.shade500,
+                        ? isDark
+                            ? Colors.white
+                            : Colors.black
+                        : isDark
+                            ? Colors.grey.shade700
+                            : Colors.grey.shade500,
                   ),
                 ),
               ),
@@ -104,8 +119,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                         : FontAwesomeIcons.heart,
                     size: 28,
                     color: _selectedIndex == 3
-                        ? Colors.black
-                        : Colors.grey.shade500,
+                        ? isDark
+                            ? Colors.white
+                            : Colors.black
+                        : isDark
+                            ? Colors.grey.shade700
+                            : Colors.grey.shade500,
                   ),
                 ),
               ),
@@ -117,8 +136,12 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                     FontAwesomeIcons.user,
                     size: 28,
                     color: _selectedIndex == 4
-                        ? Colors.black
-                        : Colors.grey.shade500,
+                        ? isDark
+                            ? Colors.white
+                            : Colors.black
+                        : isDark
+                            ? Colors.grey.shade700
+                            : Colors.grey.shade500,
                   ),
                 ),
               ),

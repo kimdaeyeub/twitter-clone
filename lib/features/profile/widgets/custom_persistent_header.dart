@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 
 class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
+  final bool isDark;
+
+  CustomPersistentHeader({
+    required this.isDark,
+  });
+
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 248, 248, 248),
+      decoration: BoxDecoration(
+        color: isDark ? Colors.black : const Color.fromARGB(255, 248, 248, 248),
       ),
-      child: const TabBar(
-        indicatorColor: Colors.black,
-        labelPadding: EdgeInsets.symmetric(
+      child: TabBar(
+        indicatorColor: isDark ? Colors.grey.shade400 : Colors.black,
+        labelPadding: const EdgeInsets.symmetric(
           vertical: 15,
         ),
         tabs: [
           Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 15,
             ),
             child: Text(
@@ -23,12 +29,12 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
-                color: Colors.black,
+                color: isDark ? Colors.grey.shade400 : Colors.black,
               ),
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 20,
             ),
             child: Text(
@@ -36,7 +42,9 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
-                color: Colors.black,
+                color: isDark ? Colors.grey.shade400 : Colors.black,
+
+                // color: Colors.black,
               ),
             ),
           ),
@@ -53,6 +61,6 @@ class CustomPersistentHeader extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return false;
+    return true;
   }
 }

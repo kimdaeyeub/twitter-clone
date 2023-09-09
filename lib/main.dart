@@ -22,6 +22,12 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
+      darkTheme: ThemeData(
+          scaffoldBackgroundColor: Colors.black,
+          textTheme: Typography.whiteCupertino,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.transparent,
+          )),
     );
   }
 }

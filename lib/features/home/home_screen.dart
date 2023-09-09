@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:twitter/features/common/widgets/post_card.dart';
+import 'package:twitter/utils.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -18,18 +21,19 @@ class HomeScreen extends StatelessWidget {
               SvgPicture.asset(
                 "assets/icons/threads.svg",
                 width: 40,
+                color: isDark ? Colors.white : null,
               ),
-              const PostCard(
+              PostCard(
                 username: "Nico",
                 time: 3,
                 post: "안녕하세요!! 니콜라스입니닷!!!!",
-                imageUrl: [
+                imageUrl: const [
                   // "https://i.imgur.com/0CfZLcI.png",
                   // "https://i.imgur.com/PgoOazS.png",
                   "https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg",
                   "https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg",
                 ],
-                avatarUrl: [
+                avatarUrl: const [
                   //  "https://avatars.githubusercontent.com/u/3612017",
                   // "https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg",
 
@@ -44,13 +48,14 @@ class HomeScreen extends StatelessWidget {
                 replies: 201,
                 likes: 30,
                 certificate: true,
+                isDarkMode: isDark,
               ),
-              const PostCard(
-                imageUrl: [],
+              PostCard(
+                imageUrl: const [],
                 username: "kdy",
                 time: 3,
                 post: "Hello Everyone",
-                avatarUrl: [
+                avatarUrl: const [
                   "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
                   "https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg",
                   "https://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg",
@@ -63,16 +68,17 @@ class HomeScreen extends StatelessWidget {
                 likes: 20,
                 replies: 132,
                 certificate: false,
+                isDarkMode: isDark,
               ),
-              const PostCard(
-                imageUrl: [
+              PostCard(
+                imageUrl: const [
                   "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
                   // "https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg",
                 ],
                 username: "민지",
                 time: 3,
                 post: "",
-                avatarUrl: [
+                avatarUrl: const [
                   // "https://img.hankyung.com/photo/202208/03.30909476.1.jpg",
                   // "https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg",
                   // "https://news.samsungdisplay.com/wp-content/uploads/2018/08/8.jpg",
@@ -85,6 +91,7 @@ class HomeScreen extends StatelessWidget {
                 likes: 99,
                 replies: 999,
                 certificate: true,
+                isDarkMode: isDark,
               ),
             ],
           ),

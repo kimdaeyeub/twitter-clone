@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter/features/activity/widgets/activity_list_tile.dart';
 import 'package:twitter/features/activity/widgets/activity_tab.dart';
+import 'package:twitter/utils.dart';
 
 class ActivityScreen extends StatefulWidget {
   const ActivityScreen({super.key});
@@ -20,6 +21,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -52,24 +54,28 @@ class _ActivityScreenState extends State<ActivityScreen> {
                 tabs: [
                   Tab(
                     child: ActivityTab(
+                      isDark: isDark,
                       isSelected: _currentTab == 0,
                       text: "All",
                     ),
                   ),
                   Tab(
                     child: ActivityTab(
+                      isDark: isDark,
                       isSelected: _currentTab == 1,
                       text: "Replies",
                     ),
                   ),
                   Tab(
                     child: ActivityTab(
+                      isDark: isDark,
                       isSelected: _currentTab == 2,
                       text: "Mentions",
                     ),
                   ),
                   Tab(
                     child: ActivityTab(
+                      isDark: isDark,
                       isSelected: _currentTab == 3,
                       text: "Video",
                     ),

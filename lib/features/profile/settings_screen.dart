@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter/features/profile/privacy_screen.dart';
 import 'package:twitter/features/profile/widgets/custom_appbar.dart';
 import 'package:twitter/features/profile/widgets/settings_screen_list_tile.dart';
+import 'package:twitter/utils.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -41,23 +42,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = isDarkMode(context);
     return SafeArea(
       child: Scaffold(
         body: Column(
           children: [
-            const CustomAppBar(
+            CustomAppBar(
               title: "Settings",
+              isDark: isDark,
             ),
             const SizedBox(
               height: 10,
             ),
-            const SettingsScreenListTile(
+            SettingsScreenListTile(
               icon: FontAwesomeIcons.userPlus,
               text: "Follow and invite friends",
+              isDark: isDark,
             ),
-            const SettingsScreenListTile(
+            SettingsScreenListTile(
               icon: FontAwesomeIcons.bell,
               text: "Notifications",
+              isDark: isDark,
             ),
             GestureDetector(
               onTap: () => Navigator.of(context).push(
@@ -65,22 +70,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   builder: (context) => const PrivacyScreen(),
                 ),
               ),
-              child: const SettingsScreenListTile(
+              child: SettingsScreenListTile(
                 icon: FontAwesomeIcons.lock,
                 text: "Privacy",
+                isDark: isDark,
               ),
             ),
-            const SettingsScreenListTile(
+            SettingsScreenListTile(
               icon: FontAwesomeIcons.circleUser,
               text: "Account",
+              isDark: isDark,
             ),
-            const SettingsScreenListTile(
+            SettingsScreenListTile(
               icon: FontAwesomeIcons.lifeRing,
               text: "Help",
+              isDark: isDark,
             ),
-            const SettingsScreenListTile(
+            SettingsScreenListTile(
               icon: FontAwesomeIcons.circleInfo,
               text: "About",
+              isDark: isDark,
             ),
             const Divider(
               height: 30,
@@ -102,8 +111,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                   GestureDetector(
                     onTap: () => _showAlertDialog(context),
-                    child: const FaIcon(
+                    child: FaIcon(
                       FontAwesomeIcons.rightFromBracket,
+                      color: isDark ? Colors.grey.shade400 : null,
                     ),
                   ),
                 ],

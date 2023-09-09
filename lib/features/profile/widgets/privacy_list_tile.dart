@@ -6,12 +6,14 @@ class PrivacyListTile extends StatelessWidget {
   final String title;
   final IconData icon;
   final Widget trailingWidget;
+  final bool isDark;
 
   const PrivacyListTile({
     super.key,
     required this.title,
     required this.icon,
     required this.trailingWidget,
+    required this.isDark,
   });
 
   @override
@@ -19,7 +21,7 @@ class PrivacyListTile extends StatelessWidget {
     return ListTile(
       leading: FaIcon(
         icon,
-        color: Colors.black,
+        color: isDark ? Colors.grey.shade400 : Colors.black,
       ),
       title: Text(
         title,

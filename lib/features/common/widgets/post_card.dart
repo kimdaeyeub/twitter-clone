@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter/features/home/widgets/ellpsis_bottom_sheet.dart';
@@ -12,6 +11,7 @@ class PostCard extends StatelessWidget {
   final int replies;
   final int likes;
   final bool certificate;
+  final bool isDarkMode;
   const PostCard({
     super.key,
     required this.imageUrl,
@@ -22,6 +22,7 @@ class PostCard extends StatelessWidget {
     required this.replies,
     required this.likes,
     required this.certificate,
+    required this.isDarkMode,
   });
 
   void _showBottomSheetForOption(BuildContext context) {
@@ -205,9 +206,10 @@ class PostCard extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () => _showBottomSheetForOption(context),
-                          child: const FaIcon(
+                          child: FaIcon(
                             FontAwesomeIcons.ellipsis,
                             size: 17,
+                            color: isDarkMode ? Colors.grey.shade500 : null,
                           ),
                         ),
                       ],
@@ -223,9 +225,9 @@ class PostCard extends StatelessWidget {
                     if (post != "") ...[
                       Text(
                         post,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 17,
-                          color: Colors.black,
+                          color: isDarkMode ? null : Colors.black,
                         ),
                       ),
                       const SizedBox(
@@ -263,31 +265,35 @@ class PostCard extends StatelessWidget {
                         height: 20,
                       ),
                     ],
-                    const Row(
+                    Row(
                       children: [
                         FaIcon(
                           FontAwesomeIcons.heart,
-                          color: Colors.black,
+                          color:
+                              isDarkMode ? Colors.grey.shade400 : Colors.black,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 15,
                         ),
                         FaIcon(
                           FontAwesomeIcons.comment,
-                          color: Colors.black,
+                          color:
+                              isDarkMode ? Colors.grey.shade400 : Colors.black,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 15,
                         ),
                         FaIcon(
                           FontAwesomeIcons.arrowsRotate,
-                          color: Colors.black,
+                          color:
+                              isDarkMode ? Colors.grey.shade400 : Colors.black,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 15,
                         ),
                         FaIcon(
-                          color: Colors.black,
+                          color:
+                              isDarkMode ? Colors.grey.shade400 : Colors.black,
                           FontAwesomeIcons.paperPlane,
                         ),
                       ],

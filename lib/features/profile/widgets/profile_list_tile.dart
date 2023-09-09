@@ -12,6 +12,7 @@ class ProfileScreenListTile extends StatelessWidget {
   final String replyText;
   final int replyCount;
   final String replyImage;
+  final bool isDark;
   const ProfileScreenListTile({
     super.key,
     required this.myname,
@@ -24,6 +25,7 @@ class ProfileScreenListTile extends StatelessWidget {
     required this.replyText,
     required this.replyCount,
     required this.replyImage,
+    required this.isDark,
   });
 
   @override
@@ -58,8 +60,9 @@ class ProfileScreenListTile extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              const FaIcon(
+              FaIcon(
                 FontAwesomeIcons.ellipsis,
+                color: isDark ? Colors.grey.shade700 : null,
               ),
             ],
           )
@@ -76,9 +79,10 @@ class ProfileScreenListTile extends StatelessWidget {
             ),
             Text(
               myText,
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.w400,
                 fontSize: 17,
+                color: isDark ? Colors.grey.shade400 : null,
               ),
             ),
             const SizedBox(
@@ -115,9 +119,10 @@ class ProfileScreenListTile extends StatelessWidget {
                           ),
                           Text(
                             replyUsername,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 17,
+                              color: isDark ? Colors.grey.shade500 : null,
                             ),
                           ),
                           const SizedBox(
@@ -154,8 +159,9 @@ class ProfileScreenListTile extends StatelessWidget {
                       ),
                       Text(
                         replyText,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 17,
+                          color: isDark ? Colors.grey.shade400 : null,
                         ),
                       ),
                       const SizedBox(
@@ -195,31 +201,31 @@ class ProfileScreenListTile extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const Row(
+            Row(
               children: [
                 FaIcon(
                   FontAwesomeIcons.heart,
-                  color: Colors.black,
+                  color: isDark ? Colors.grey.shade400 : Colors.black,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 FaIcon(
                   FontAwesomeIcons.comment,
-                  color: Colors.black,
+                  color: isDark ? Colors.grey.shade400 : Colors.black,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 FaIcon(
                   FontAwesomeIcons.arrowsRotate,
-                  color: Colors.black,
+                  color: isDark ? Colors.grey.shade400 : Colors.black,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 FaIcon(
-                  color: Colors.black,
+                  color: isDark ? Colors.grey.shade400 : Colors.black,
                   FontAwesomeIcons.paperPlane,
                 ),
               ],
