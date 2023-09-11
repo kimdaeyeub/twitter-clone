@@ -7,6 +7,9 @@ import 'package:twitter/utils.dart';
 class ActivityScreen extends StatefulWidget {
   const ActivityScreen({super.key});
 
+  static const String routeName = "activity";
+  static const String routeUrl = "/activity";
+
   @override
   State<ActivityScreen> createState() => _ActivityScreenState();
 }

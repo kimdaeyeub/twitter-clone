@@ -8,6 +8,9 @@ import 'package:twitter/utils.dart';
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+  static const String routeName = "profile";
+  static const String routeUrl = "/profile";
+
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }

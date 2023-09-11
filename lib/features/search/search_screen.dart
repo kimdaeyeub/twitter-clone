@@ -6,6 +6,9 @@ import 'package:twitter/utils.dart';
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
+  static const String routeName = "search";
+  static const String routeUrl = "/search";
+
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }

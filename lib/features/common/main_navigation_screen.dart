@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:twitter/features/activity/activity_screen.dart';
 import 'package:twitter/features/home/home_screen.dart';
 import 'package:twitter/features/plus/widgets/add_thread_modal_bottom_sheet.dart';
@@ -8,7 +9,8 @@ import 'package:twitter/features/search/search_screen.dart';
 import 'package:twitter/utils.dart';
 
 class MainNavigationScreen extends StatefulWidget {
-  const MainNavigationScreen({super.key});
+  const MainNavigationScreen({super.key, required this.screen});
+  final String screen;
 
   @override
   State<MainNavigationScreen> createState() => _MainNavigationScreenState();
@@ -16,9 +18,15 @@ class MainNavigationScreen extends StatefulWidget {
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   final GlobalKey<NavigatorState> _key = GlobalKey<NavigatorState>();
-  int _selectedIndex = 0;
+
+  final List<String> _screen = [
+    "home",
+    "search",
+    "activity",
+    "profile",
+  ];
+
   void _onMoveTap(int value) {
-    _selectedIndex = value;
     setState(() {});
   }
 
@@ -43,9 +51,10 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = isDarkMode(context);
+    print(widget.screen);
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        color: isDark ? Colors.grey.shade900 : null,
+        color: isDark ? const Color.fromARGB(255, 22, 22, 22) : null,
         elevation: 1,
         child: Container(
           padding: const EdgeInsets.symmetric(
@@ -62,7 +71,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   child: FaIcon(
                     FontAwesomeIcons.house,
                     size: 28,
-                    color: _selectedIndex == 0
+                    color: widget.screen == "home"
                         ? isDark
                             ? Colors.white
                             : Colors.black
@@ -79,7 +88,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   child: FaIcon(
                     FontAwesomeIcons.magnifyingGlass,
                     size: 28,
-                    color: _selectedIndex == 1
+                    color: widget.screen == "search"
                         ? isDark
                             ? Colors.white
                             : Colors.black
@@ -99,7 +108,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   child: FaIcon(
                     FontAwesomeIcons.penToSquare,
                     size: 28,
-                    color: _selectedIndex == 2
+                    color: widget.screen == "asd"
                         ? isDark
                             ? Colors.white
                             : Colors.black
@@ -114,11 +123,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   child: FaIcon(
-                    _selectedIndex == 3
+                    widget.screen == "activity"
                         ? FontAwesomeIcons.solidHeart
                         : FontAwesomeIcons.heart,
                     size: 28,
-                    color: _selectedIndex == 3
+                    color: widget.screen == "activity"
                         ? isDark
                             ? Colors.white
                             : Colors.black
@@ -135,7 +144,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   child: FaIcon(
                     FontAwesomeIcons.user,
                     size: 28,
-                    color: _selectedIndex == 4
+                    color: widget.screen == "profile"
                         ? isDark
                             ? Colors.white
                             : Colors.black
@@ -152,14 +161,14 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       body: Stack(
         children: [
           Offstage(
-            offstage: _selectedIndex != 0,
+            offstage: widget.screen != "home",
             child: const HomeScreen(),
             // child: const Center(
             //   child: Text("Hello"),
             // ),
           ),
           Offstage(
-            offstage: _selectedIndex != 1,
+            offstage: widget.screen != "search",
             child: const SearchScreen(),
           ),
           // Offstage(
@@ -175,11 +184,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           //   ),
           // ),
           Offstage(
-            offstage: _selectedIndex != 3,
+            offstage: widget.screen != "activity",
             child: const ActivityScreen(),
           ),
           Offstage(
-            offstage: _selectedIndex != 4,
+            offstage: widget.screen != "profile",
             child: Navigator(
               key: _key,
               onGenerateRoute: (settings) => MaterialPageRoute(
