@@ -65,69 +65,71 @@ class ActivityListTile extends StatelessWidget {
         const SizedBox(
           width: 20,
         ),
-        Container(
-          margin: const EdgeInsets.only(
-            bottom: 15,
-          ),
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                color: Colors.grey.shade300,
+        Expanded(
+          child: Container(
+            margin: const EdgeInsets.only(
+              bottom: 15,
+            ),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: Colors.grey.shade300,
+                ),
               ),
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    username,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      username,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      "${time}h",
+                      style: TextStyle(
+                        color: Colors.grey.shade400,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 2,
+                ),
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.grey.shade400,
+                  ),
+                ),
+                const SizedBox(
+                  height: 2,
+                ),
+                SizedBox(
+                  width: 300,
+                  child: Text(
+                    subtitle,
                     style: const TextStyle(
                       fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w300,
                     ),
                   ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    "${time}h",
-                    style: TextStyle(
-                      color: Colors.grey.shade400,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 2,
-              ),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.grey.shade400,
                 ),
-              ),
-              const SizedBox(
-                height: 2,
-              ),
-              SizedBox(
-                width: 300,
-                child: Text(
-                  subtitle,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w300,
-                  ),
+                const SizedBox(
+                  height: 15,
                 ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-            ],
+              ],
+            ),
           ),
         )
       ],

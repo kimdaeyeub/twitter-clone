@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:twitter/features/profile/settings_screen.dart';
 import 'package:twitter/features/profile/widgets/custom_persistent_header.dart';
 import 'package:twitter/features/profile/widgets/profile_list_tile.dart';
@@ -17,11 +18,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   void _onMoveSettingsScreen() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const SettingsScreen(),
-      ),
-    );
+    context.go(SettingsScreen.routeName);
   }
 
   @override

@@ -20,13 +20,15 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   final GlobalKey<NavigatorState> _key = GlobalKey<NavigatorState>();
 
   final List<String> _screen = [
-    "home",
+    "",
     "search",
+    "xxxx",
     "activity",
     "profile",
   ];
 
   void _onMoveTap(int value) {
+    context.go("/${_screen[value]}");
     setState(() {});
   }
 
