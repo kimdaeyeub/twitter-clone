@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:twitter/features/activity/activity_screen.dart';
@@ -9,15 +10,16 @@ import 'package:twitter/features/profile/views/profile_screen.dart';
 import 'package:twitter/features/search/search_screen.dart';
 import 'package:twitter/utils.dart';
 
-class MainNavigationScreen extends StatefulWidget {
+class MainNavigationScreen extends ConsumerStatefulWidget {
   const MainNavigationScreen({super.key, required this.screen});
   final String screen;
 
   @override
-  State<MainNavigationScreen> createState() => _MainNavigationScreenState();
+  ConsumerState<MainNavigationScreen> createState() =>
+      _MainNavigationScreenState();
 }
 
-class _MainNavigationScreenState extends State<MainNavigationScreen> {
+class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
   final GlobalKey<NavigatorState> _key = GlobalKey<NavigatorState>();
   int _selectedIndex = 0;
   final List<String> _screen = [
@@ -58,8 +60,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = isDarkMode(context);
-    print(widget.screen);
+    final isDark = isDarkMode(context, ref);
+    print(context);
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         color: isDark ? const Color.fromARGB(255, 22, 22, 22) : null,

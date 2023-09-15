@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:twitter/features/profile/view_models/toggle_mode_view_model.dart';
@@ -9,17 +10,17 @@ import 'package:twitter/features/profile/views/widgets/privacy_list_tile.dart';
 import 'package:twitter/features/profile/views/widgets/settings_screen_list_tile.dart';
 import 'package:twitter/utils.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
   static const String routeName = "settings";
   static const String routeUrl = "/settings";
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   void _showAlertDialog(BuildContext context) {
     showCupertinoModalPopup<void>(
       context: context,
@@ -48,7 +49,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = isDarkMode(context);
+    final isDark = isDarkMode(context, ref);
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -99,13 +100,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             PrivacyListTile(
               title: "다크모드",
-              icon: context.watch<ToggleDarkModeViewModel>().isDarkMode
+              icon: ref
+                      .watch<ToggleDarkModeViewModel>(toggleDarkModeViewModel)
+                      .isDarkMode
                   ? FontAwesomeIcons.sun
                   : FontAwesomeIcons.moon,
               trailingWidget: CupertinoSwitch(
-                value: context.watch<ToggleDarkModeViewModel>().isDarkMode,
-                onChanged: (value) =>
-                    context.read<ToggleDarkModeViewModel>().toggleDarkMode(),
+                value: ref
+                    .watch<ToggleDarkModeViewModel>(toggleDarkModeViewModel)
+                    .isDarkMode,
+                onChanged: (value) => ref
+                    .read<ToggleDarkModeViewModel>(toggleDarkModeViewModel)
+                    .toggleDarkMode(),
               ),
               isDark: isDark,
             ),

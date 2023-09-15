@@ -15,7 +15,6 @@ class _PasswordScreenState extends State<PasswordScreen> {
   bool _passwordValidation = false;
 
   void _onMoveNextScreen() {
-    print("object");
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const InterestScreen(),

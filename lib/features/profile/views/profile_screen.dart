@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:twitter/features/profile/views/settings_screen.dart';
@@ -7,19 +8,18 @@ import 'package:twitter/features/profile/views/widgets/custom_persistent_header.
 import 'package:twitter/features/profile/views/widgets/profile_list_tile.dart';
 import 'package:twitter/utils.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
   static const String routeName = "profile";
   static const String routeUrl = "/profile";
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   void _onMoveSettingsScreenForWeb() {
-    print("hello");
     context.goNamed(SettingsScreen.routeName);
   }
 
@@ -33,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = isDarkMode(context);
+    final isDark = isDarkMode(context, ref);
     const isWeb = kIsWeb;
     return Scaffold(
       body: SafeArea(

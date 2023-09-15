@@ -95,7 +95,6 @@ class _CameraViewState extends State<CameraViewScreen> {
 
   Future<void> _getImageFromGallery() async {
     final xFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-    print(xFile);
     _xFile = xFile;
     setState(() {});
   }
