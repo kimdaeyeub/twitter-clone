@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter/features/profile/widgets/custom_appbar.dart';
-import 'package:twitter/features/profile/widgets/privacy_list_tile.dart';
+import 'package:twitter/features/profile/views/widgets/custom_appbar.dart';
+import 'package:twitter/features/profile/views/widgets/privacy_list_tile.dart';
 import 'package:twitter/utils.dart';
 
 class PrivacyScreen extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:twitter/features/common/main_navigation_screen.dart';
-import 'package:twitter/features/profile/privacy_screen.dart';
-import 'package:twitter/features/profile/settings_screen.dart';
+import 'package:twitter/features/profile/views/privacy_screen.dart';
+import 'package:twitter/features/profile/views/settings_screen.dart';
 
 final router = GoRouter(
   routes: [

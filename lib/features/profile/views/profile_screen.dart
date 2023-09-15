@@ -1,9 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:twitter/features/profile/settings_screen.dart';
-import 'package:twitter/features/profile/widgets/custom_persistent_header.dart';
-import 'package:twitter/features/profile/widgets/profile_list_tile.dart';
+import 'package:twitter/features/profile/views/settings_screen.dart';
+import 'package:twitter/features/profile/views/widgets/custom_persistent_header.dart';
+import 'package:twitter/features/profile/views/widgets/profile_list_tile.dart';
 import 'package:twitter/utils.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -17,13 +18,23 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  void _onMoveSettingsScreen() {
-    context.go(SettingsScreen.routeName);
+  void _onMoveSettingsScreenForWeb() {
+    print("hello");
+    context.goNamed(SettingsScreen.routeName);
+  }
+
+  void _onMoveSettingsScreenForMobile() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const SettingsScreen(),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final isDark = isDarkMode(context);
+    const isWeb = kIsWeb;
     return Scaffold(
       body: SafeArea(
         child: DefaultTabController(
@@ -54,7 +65,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               width: 20,
                             ),
                             GestureDetector(
-                              onTap: _onMoveSettingsScreen,
+                              onTap: isWeb
+                                  ? _onMoveSettingsScreenForWeb
+                                  : _onMoveSettingsScreenForMobile,
                               child: const FaIcon(
                                 FontAwesomeIcons.barsStaggered,
                                 size: 30,

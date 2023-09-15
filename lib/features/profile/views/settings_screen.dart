@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter/features/profile/privacy_screen.dart';
-import 'package:twitter/features/profile/widgets/custom_appbar.dart';
-import 'package:twitter/features/profile/widgets/settings_screen_list_tile.dart';
+import 'package:provider/provider.dart';
+import 'package:twitter/features/profile/view_models/toggle_mode_view_model.dart';
+import 'package:twitter/features/profile/views/privacy_screen.dart';
+import 'package:twitter/features/profile/views/widgets/custom_appbar.dart';
+import 'package:twitter/features/profile/views/widgets/privacy_list_tile.dart';
+import 'package:twitter/features/profile/views/widgets/settings_screen_list_tile.dart';
 import 'package:twitter/utils.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -92,6 +95,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SettingsScreenListTile(
               icon: FontAwesomeIcons.circleInfo,
               text: "About",
+              isDark: isDark,
+            ),
+            PrivacyListTile(
+              title: "다크모드",
+              icon: context.watch<ToggleDarkModeViewModel>().isDarkMode
+                  ? FontAwesomeIcons.sun
+                  : FontAwesomeIcons.moon,
+              trailingWidget: CupertinoSwitch(
+                value: context.watch<ToggleDarkModeViewModel>().isDarkMode,
+                onChanged: (value) =>
+                    context.read<ToggleDarkModeViewModel>().toggleDarkMode(),
+              ),
               isDark: isDark,
             ),
             const Divider(
