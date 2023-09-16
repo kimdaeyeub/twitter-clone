@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:twitter/features/auth/repos/auth_repo.dart';
 import 'package:twitter/features/profile/view_models/toggle_mode_view_model.dart';
 import 'package:twitter/features/profile/views/privacy_screen.dart';
 import 'package:twitter/features/profile/views/widgets/custom_appbar.dart';
@@ -37,7 +39,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
           CupertinoDialogAction(
             isDestructiveAction: true,
-            onPressed: () {
+            onPressed: () async {
+              await ref.read(authRepo).logOut();
               Navigator.pop(context);
             },
             child: const Text('Yes'),

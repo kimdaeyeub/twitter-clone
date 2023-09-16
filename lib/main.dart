@@ -1,10 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart';
+import 'package:twitter/features/auth/repos/auth_repo.dart';
+import 'package:twitter/features/auth/view/login_screen.dart';
+import 'package:twitter/features/common/main_navigation_screen.dart';
+import 'package:twitter/features/home/home_screen.dart';
 import 'package:twitter/features/profile/view_models/toggle_mode_view_model.dart';
+import 'package:twitter/firebase_options.dart';
 import 'package:twitter/router.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     const ProviderScope(
       child: MyApp(),
@@ -18,7 +29,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
-      routerConfig: router,
+      routerConfig: ref.watch(router),
       debugShowCheckedModeBanner: false,
       themeMode:
           ref.watch<ToggleDarkModeViewModel>(toggleDarkModeViewModel).isDarkMode
