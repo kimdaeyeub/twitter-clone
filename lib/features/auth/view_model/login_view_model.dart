@@ -4,24 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:twitter/features/auth/repos/auth_repo.dart';
-import 'package:twitter/features/common/main_navigation_screen.dart';
 import 'package:twitter/utils.dart';
 
-class CreateAccountViewModel extends AsyncNotifier<void> {
+class LoginViewModel extends AsyncNotifier<void> {
   late final AuthRepository _authRepo;
+
   @override
   FutureOr<void> build() {
     _authRepo = ref.read(authRepo);
   }
 
-  Future<void> createAccount(
+  Future<void> login(
       String email, String password, BuildContext context) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
-      final createUser = await _authRepo.createAccount(email, password);
-      print(ref.watch(authRepo).isLoggedIn);
+      await _authRepo.login(email, password);
     });
-
     if (state.hasError) {
       showFirebaseErrorSnack(
         context,
@@ -33,6 +31,6 @@ class CreateAccountViewModel extends AsyncNotifier<void> {
   }
 }
 
-final createAccountVM = AsyncNotifierProvider<CreateAccountViewModel, void>(
-  () => CreateAccountViewModel(),
+final loginViewModel = AsyncNotifierProvider<LoginViewModel, void>(
+  () => LoginViewModel(),
 );

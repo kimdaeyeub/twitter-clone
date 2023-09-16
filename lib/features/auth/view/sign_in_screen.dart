@@ -26,7 +26,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
           _passwordController.text,
           context,
         );
-    print(ref.read(authRepo).user);
   }
 
   @override

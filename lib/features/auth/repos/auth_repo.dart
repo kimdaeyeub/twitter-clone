@@ -16,6 +16,13 @@ class AuthRepository {
     );
   }
 
+  Future<void> login(String email, String password) async {
+    await _firebaseAuth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
+
   Future<void> logOut() async {
     await _firebaseAuth.signOut();
   }

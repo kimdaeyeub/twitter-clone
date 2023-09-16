@@ -39,9 +39,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
           CupertinoDialogAction(
             isDestructiveAction: true,
-            onPressed: () async {
-              await ref.read(authRepo).logOut();
-              Navigator.pop(context);
+            onPressed: () {
+              ref.read(authRepo).logOut();
+              context.go("/login");
             },
             child: const Text('Yes'),
           ),

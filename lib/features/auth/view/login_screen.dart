@@ -1,22 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:twitter/features/auth/view/sign_in_screen.dart';
+import 'package:twitter/features/auth/view_model/login_view_model.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
   static const String routeURL = "/login";
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   void _onMoveSignUpScreen() {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const SignInScreen(),
       ),
     );
+  }
+
+  void _onSubmit() {
+    ref.read(loginViewModel.notifier).login(
+          _emailController.text,
+          _passwordController.text,
+          context,
+        );
   }
 
   @override
@@ -57,6 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 80,
                   ),
                   TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
@@ -88,6 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 10,
                   ),
                   TextField(
+                    controller: _passwordController,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
@@ -118,21 +132,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  FractionallySizedBox(
-                    widthFactor: 1,
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      decoration: BoxDecoration(
-                        color: const Color(0xff0D64E1),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: const Text(
-                        "Log in",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 20,
+                  GestureDetector(
+                    onTap: _onSubmit,
+                    child: FractionallySizedBox(
+                      widthFactor: 1,
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        decoration: BoxDecoration(
+                          color: const Color(0xff0D64E1),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: const Text(
+                          "Log in",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                     ),
