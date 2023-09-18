@@ -2,20 +2,23 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter/features/plus/add_thread_screen.dart';
+import 'package:twitter/features/plus/view_models/add_threads_view_model.dart';
+import 'package:twitter/features/plus/views/add_thread_screen.dart';
 
-class AddThreadModalBottomSheet extends StatefulWidget {
+class AddThreadModalBottomSheet extends ConsumerStatefulWidget {
   const AddThreadModalBottomSheet({
     super.key,
   });
 
   @override
-  State<AddThreadModalBottomSheet> createState() =>
+  ConsumerState<AddThreadModalBottomSheet> createState() =>
       _AddThreadModalBottomSheetState();
 }
 
-class _AddThreadModalBottomSheetState extends State<AddThreadModalBottomSheet> {
+class _AddThreadModalBottomSheetState
+    extends ConsumerState<AddThreadModalBottomSheet> {
   final TextEditingController _textController = TextEditingController();
 
   String _text = "";
@@ -38,6 +41,15 @@ class _AddThreadModalBottomSheetState extends State<AddThreadModalBottomSheet> {
     );
     _xFile = result;
     setState(() {});
+  }
+
+  void _onSubmit() {
+    print(_xFile!.path);
+    ref.read(addThreadsViewModel.notifier).addThreads(
+          _text,
+          File(_xFile!.path),
+          context,
+        );
   }
 
   @override
@@ -209,7 +221,7 @@ class _AddThreadModalBottomSheetState extends State<AddThreadModalBottomSheet> {
                     GestureDetector(
                       onTap: () {
                         if (_text != "") {
-                          Navigator.of(context).pop();
+                          _onSubmit();
                         }
                       },
                       child: Text(

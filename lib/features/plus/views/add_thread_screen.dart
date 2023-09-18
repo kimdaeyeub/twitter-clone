@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:twitter/features/plus/widgets/camera_view.dart';
+import 'package:twitter/features/plus/views/widgets/camera_view.dart';
 
 class AddThreadsScreen extends StatefulWidget {
   const AddThreadsScreen({super.key});
