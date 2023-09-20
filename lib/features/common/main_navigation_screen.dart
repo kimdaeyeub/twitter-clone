@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:twitter/features/activity/activity_screen.dart';
-import 'package:twitter/features/home/home_screen.dart';
+import 'package:twitter/features/home/views/home_screen.dart';
 import 'package:twitter/features/plus/views/widgets/add_thread_modal_bottom_sheet.dart';
 import 'package:twitter/features/profile/views/profile_screen.dart';
 import 'package:twitter/features/search/search_screen.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter/features/home/widgets/ellpsis_bottom_sheet.dart';
+import 'package:twitter/features/home/views/widgets/ellpsis_bottom_sheet.dart';
 
 class PostCard extends StatelessWidget {
   final List<String> imageUrl;
