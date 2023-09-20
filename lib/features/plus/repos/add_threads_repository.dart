@@ -15,7 +15,7 @@ class AdddThreadsRepository {
   }
 
   Future<void> addThreads(Threads threads) async {
-    final now = DateTime.now();
+    final now = DateTime.now().millisecondsSinceEpoch;
     final result = await _db
         .collection("threads")
         .doc(now.toString())

@@ -7,7 +7,10 @@ class HomeRepository {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Future<QuerySnapshot<Map<String, dynamic>>> getThreads() async {
-    final threads = await _db.collection("threads").get();
+    final threads = await _db
+        .collection("threads")
+        .orderBy("createdAt", descending: true)
+        .get();
     return threads;
   }
 }

@@ -64,9 +64,13 @@ class PostCard extends StatelessWidget {
                       Positioned.fill(
                         child: CircleAvatar(
                           radius: 25,
-                          foregroundImage: NetworkImage(
-                            avatarUrl[0],
-                          ),
+                          foregroundImage: avatarUrl[0] != ""
+                              ? NetworkImage(
+                                  avatarUrl[0],
+                                )
+                              : null,
+                          foregroundColor:
+                              const Color.fromARGB(255, 82, 152, 210),
                         ),
                       ),
                       Positioned(
@@ -109,38 +113,40 @@ class PostCard extends StatelessWidget {
                 SizedBox(
                   height: 45,
                   width: 45,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        child: CircleAvatar(
-                          radius: 10,
-                          foregroundImage: NetworkImage(
-                            avatarUrl[1],
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: CircleAvatar(
-                          radius: 8,
-                          foregroundImage: NetworkImage(
-                            avatarUrl[2],
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: CircleAvatar(
-                          radius: 8,
-                          foregroundImage: NetworkImage(
-                            avatarUrl[3],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                  child: avatarUrl[1] != ""
+                      ? Stack(
+                          children: [
+                            Positioned(
+                              top: 0,
+                              right: 0,
+                              child: CircleAvatar(
+                                radius: 10,
+                                foregroundImage: NetworkImage(
+                                  avatarUrl[1],
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: CircleAvatar(
+                                radius: 8,
+                                foregroundImage: NetworkImage(
+                                  avatarUrl[2],
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: CircleAvatar(
+                                radius: 8,
+                                foregroundImage: NetworkImage(
+                                  avatarUrl[3],
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      : null,
                 ),
               ],
             ),
@@ -234,7 +240,7 @@ class PostCard extends StatelessWidget {
                         height: 15,
                       ),
                     ],
-                    if (imageUrl.isNotEmpty) ...[
+                    if (imageUrl[0] != "") ...[
                       SizedBox(
                         width: 300,
                         height: 225,

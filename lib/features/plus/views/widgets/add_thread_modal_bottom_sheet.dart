@@ -44,10 +44,9 @@ class _AddThreadModalBottomSheetState
   }
 
   void _onSubmit() {
-    print(_xFile!.path);
     ref.read(addThreadsViewModel.notifier).addThreads(
           _text,
-          File(_xFile!.path),
+          File(_xFile == null ? "" : _xFile!.path),
           context,
         );
   }

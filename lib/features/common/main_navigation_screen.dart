@@ -170,13 +170,14 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
       ),
       body: Stack(
         children: [
-          Offstage(
-            offstage: _selectedIndex != 0,
-            child: const HomeScreen(),
-            // child: const Center(
-            //   child: Text("Hello"),
-            // ),
-          ),
+          // Offstage(
+          //   offstage: _selectedIndex != 0,
+          //   child: const HomeScreen(),
+          //   // child: const Center(
+          //   //   child: Text("Hello"),
+          //   // ),
+          // ),
+          const HomeScreen(),
           Offstage(
             offstage: _selectedIndex != 1,
             child: const SearchScreen(),

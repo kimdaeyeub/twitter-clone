@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,6 +21,7 @@ class _AddThreadsScreenState extends State<AddThreadsScreen> {
   bool _isSelfiMode = false;
   XFile? _xFile;
   late FlashMode _flashMode;
+  late final bool _noCamera = Platform.isIOS && kDebugMode;
 
   void _onMoveBack() {
     if (_xFile != null) {
@@ -84,7 +86,13 @@ class _AddThreadsScreenState extends State<AddThreadsScreen> {
   @override
   void initState() {
     super.initState();
-    initPermissions();
+    if (!_noCamera) {
+      initPermissions();
+    } else {
+      setState(() {
+        // _hasPermission = true;
+      });
+    }
   }
 
   Future<void> _takePicture() async {
@@ -132,7 +140,9 @@ class _AddThreadsScreenState extends State<AddThreadsScreen> {
                   width: MediaQuery.of(context).size.width,
                   child: Stack(
                     children: [
-                      _hasPermission && _cameraController.value.isInitialized
+                      _hasPermission &&
+                              _cameraController.value.isInitialized &&
+                              !_noCamera
                           ? _xFile == null
                               ? CameraPreview(_cameraController)
                               : Image.file(
