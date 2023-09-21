@@ -42,7 +42,6 @@ class HomeScreen extends ConsumerWidget {
                 return ListView.builder(
                   itemCount: data.length,
                   itemBuilder: (context, index) {
-                    print(data[index].text);
                     return PostCard(
                       imageUrl: [
                         data[index].file,

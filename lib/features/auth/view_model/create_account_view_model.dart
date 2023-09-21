@@ -19,7 +19,6 @@ class CreateAccountViewModel extends AsyncNotifier<void> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       final createUser = await _authRepo.createAccount(email, password);
-      print(ref.watch(authRepo).isLoggedIn);
     });
 
     if (state.hasError) {

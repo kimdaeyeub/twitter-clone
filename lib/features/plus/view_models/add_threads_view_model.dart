@@ -47,9 +47,7 @@ class AddThreadsViewModel extends AsyncNotifier<void> {
     );
 
     if (state.hasError) {
-      print(state.error);
     } else {
-      print("Success");
       ref.read(getThreadsViewModel.notifier).refresh();
       context.pop();
     }

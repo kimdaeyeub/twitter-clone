@@ -61,7 +61,6 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = isDarkMode(context, ref);
-    print(context);
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
         color: isDark ? const Color.fromARGB(255, 22, 22, 22) : null,
