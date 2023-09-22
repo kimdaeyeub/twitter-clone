@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:twitter/features/common/widgets/post_card.dart';
+import 'package:twitter/features/plus/models/threads_model.dart';
 import 'package:twitter/features/search/view_model/search_view_model.dart';
 import 'package:twitter/features/search/widgets/search_screen_listtile.dart';
 import 'package:twitter/utils.dart';
@@ -56,32 +59,40 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             ),
           ),
         ),
-        body: ref.watch(searchViewModel).when(
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
-              ),
-              error: (error, stackTrace) => Center(
-                child: Text(
-                  error.toString(),
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              data: (data) {
-                return ListView.builder(
-                  itemCount: data.length,
-                  itemBuilder: (context, index) {
-                    print(data[0]);
+        body: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('threads')
+              .orderBy("text")
+              .startAt([_searchController.text]).endAt(
+                  ["${_searchController.text}\uf8ff"]).snapshots(),
+          builder: (context, snapshot) {
+            return ListView.builder(
+              itemCount: snapshot.data?.docs.length,
+              itemBuilder: (context, index) {
+                if (snapshot.data == null) {
+                  return const Center(
+                    child: Text("Error"),
+                  );
+                }
+                final data = snapshot.data!.docs[index];
 
-                    return Center(
-                      child: Text(data[index].text),
-                    );
-                  },
+                return PostCard(
+                  imageUrl: [
+                    data["file"],
+                  ],
+                  username: "anonymous",
+                  time: 3,
+                  post: data['text'],
+                  avatarUrl: const ["", "", "", ""],
+                  replies: 3,
+                  likes: 4,
+                  certificate: true,
+                  isDarkMode: isDark,
                 );
               },
-            ),
+            );
+          },
+        ),
       ),
     );
   }

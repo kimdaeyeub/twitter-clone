@@ -23,7 +23,7 @@ class SearchScreenListTile extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 25,
-          foregroundImage: NetworkImage(userImage),
+          foregroundImage: userImage != "" ? NetworkImage(userImage) : null,
         ),
         const SizedBox(
           width: 20,
